@@ -6,7 +6,7 @@
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 23:58:21 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/06/22 19:08:02 by nhanafi          ###   ########.fr       */
+/*   Updated: 2022/06/25 00:20:27 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_data {
 	sem_t		*fork;
 	sem_t		*stop;
 	sem_t		*must_eat;
+	sem_t		*print;
 }				t_data;
 
 typedef struct s_vars {
@@ -58,4 +59,5 @@ void		*routine(void *addr);
 void		*ft_check(void *addr);
 void		*ft_dead(void *addr);
 void		*ft_must_eat(void *addr);
+void		my_print(char *s, t_data *data, t_vars *vars, int isdead);
 #endif

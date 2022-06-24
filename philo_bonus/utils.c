@@ -6,7 +6,7 @@
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 21:50:27 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/06/19 20:20:05 by nhanafi          ###   ########.fr       */
+/*   Updated: 2022/06/25 00:24:17 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,18 @@ void	ft_delay(long long time)
 	current_time = get_time();
 	while (get_time() - current_time < time)
 		;
+}
+
+void	my_print(char *s, t_data *data, t_vars *vars, int isdead)
+{
+	sem_wait(data->print);
+	printf("%-5lld %-2d %s\n", get_time() - data->begin_time, \
+		vars->idx + 1, s);
+	if (!isdead)
+		sem_post(data->print);
+	else
+	{
+		sem_post(data->stop);
+		sem_wait(data->dead);
+	}
 }

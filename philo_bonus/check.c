@@ -6,7 +6,7 @@
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 20:12:32 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/06/22 02:33:07 by nhanafi          ###   ########.fr       */
+/*   Updated: 2022/06/25 00:25:38 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ void	*ft_dead(void *addr)
 	i = 0;
 	while (get_time() - vars->time <= data->die_time)
 		;
-	sem_post(data->stop);
-	sem_wait(data->dead);
-	printf("%-5lld %-2d is died\n", get_time() - data->begin_time, \
-		vars->idx + 1);
+	my_print("is died", data, vars, 1);
 	return (NULL);
 }
 
