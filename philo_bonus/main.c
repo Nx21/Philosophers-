@@ -6,7 +6,7 @@
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 23:58:23 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/06/25 00:45:43 by nhanafi          ###   ########.fr       */
+/*   Updated: 2022/06/25 01:48:11 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	creat_pros(t_data *data, int idx)
 		return (1);
 	if (pthread_create(&(thrid[2]), NULL, &ft_dead, &vars))
 		return (1);
-	// if (vars.idx == 0 && pthread_create(&(thrid[3]), NULL, &ft_must_eat, &vars))
-	// 	return (1);
+	if (vars.idx == 0 && pthread_create(&(thrid[3]), NULL, &ft_must_eat, &vars))
+		return (1);
 	i = 0;
 	while (i < 3 + !(vars.idx))
 	{
