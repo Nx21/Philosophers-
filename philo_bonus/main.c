@@ -6,7 +6,7 @@
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 23:58:23 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/06/25 01:48:11 by nhanafi          ###   ########.fr       */
+/*   Updated: 2022/06/26 23:14:47 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ int	main(int argc, char *argv[])
 	if (init_data(&data, argv))
 		return (ft_free_data(&data));
 	pid = malloc(sizeof(pid_t) * data.nbr);
-	if(!pid)
-		return 0;
+	if (!pid)
+		return (0);
 	creat_pro(data, pid);
 	ft_destroy(pid, &data);
 	return (0);

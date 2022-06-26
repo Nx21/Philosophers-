@@ -6,35 +6,18 @@
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 09:18:34 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/06/24 21:35:10 by nhanafi          ###   ########.fr       */
+/*   Updated: 2022/06/26 23:05:41 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	my_printf(char *s, t_data *data, t_vars *vars, int isdied)
-{
-	pthread_mutex_lock(&data->print);
-	if (data->stop || data->comp_philo >= data->nbr)
-	{
-		pthread_mutex_unlock(&data->print);
-		return (1);
-	}
-	if	(isdied)
-		data->stop = 1;
-	printf("%-5lld %-2d %s\n", get_time() - data->begin_time, \
-		vars->idx + 1, s);
-	pthread_mutex_unlock(&data->print);
-	return (0);
-}
-
 int	ft_eat(t_vars *vars, t_data *data)
 {
-	ft_lock(data, ((vars->idx + 1) % 2 + vars->idx) % data->nbr);
-	
+	pthread_mutex_lock(&data->fork[(!(vars->idx % 2) + vars->idx) % data->nbr]);
 	if (my_printf("has taken a fork", data, vars, 0))
 		return (1);
-	ft_lock(data, (vars->idx % 2 + vars->idx) % data->nbr);
+	pthread_mutex_lock(&data->fork[((vars->idx % 2) + vars->idx) % data->nbr]);
 	if (my_printf("is eating", data, vars, 0))
 		return (1);
 	vars->nbr_time++;
@@ -49,8 +32,10 @@ int	ft_eat(t_vars *vars, t_data *data)
 
 int	ft_sleep(t_vars *vars, t_data *data)
 {
-	ft_unlock(data, ((vars->idx + 1) % 2 + vars->idx) % data->nbr);
-	ft_unlock(data, (vars->idx % 2 + vars->idx) % data->nbr);
+	pthread_mutex_unlock(&data->fork[(!(vars->idx % 2) + vars->idx) \
+	% data->nbr]);
+	pthread_mutex_unlock(&data->fork[((vars->idx % 2) + vars->idx) \
+	% data->nbr]);
 	if (my_printf("is sleeping", data, vars, 0))
 		return (1);
 	ft_delay(data->sleep_time, data);
@@ -73,11 +58,11 @@ void	*routine(void *addr)
 	vars = addr;
 	data = vars->data;
 	while (vars->idx % 2)
-		if(ft_think(vars, data) || ft_eat(vars, data) \
+		if (ft_think(vars, data) || ft_eat(vars, data) \
 		|| ft_sleep(vars, data))
 			return (NULL);
 	while (!(vars->idx % 2))
-		if(ft_eat(vars, data) \
+		if (ft_eat(vars, data) \
 		|| ft_sleep(vars, data) || ft_think(vars, data))
 			return (NULL);
 	return (NULL);
