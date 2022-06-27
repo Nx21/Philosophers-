@@ -6,7 +6,7 @@
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 23:58:21 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/06/26 23:01:19 by nhanafi          ###   ########.fr       */
+/*   Updated: 2022/06/24 19:29:32 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ void		ft_error(void);
 int			init_data(t_data *data, char **av);
 void		init_vars(t_vars *vars, t_data *data, int i);
 void		ft_delay(long long time, t_data *data);
+void		ft_delay(long long time, t_data *data);
+void		ft_lock(t_data *data, int i);
+void		ft_unlock(t_data *data, int i);
 void		*routine(void *addr);
 void		*ft_check(void *addr);
-int			my_printf(char *s, t_data *data, t_vars *vars, int isdied);
 #endif

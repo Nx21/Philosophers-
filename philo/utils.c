@@ -6,7 +6,7 @@
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 21:50:27 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/06/26 23:00:49 by nhanafi          ###   ########.fr       */
+/*   Updated: 2022/06/24 19:13:05 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,12 @@ void	ft_delay(long long time, t_data *data)
 		;
 }
 
-int	my_printf(char *s, t_data *data, t_vars *vars, int isdied)
+void	ft_lock(t_data *data, int i)
 {
-	pthread_mutex_lock(&data->print);
-	if (data->stop || data->comp_philo >= data->nbr)
-	{
-		pthread_mutex_unlock(&data->print);
-		return (1);
-	}
-	if (isdied)
-		data->stop = 1;
-	printf("%-5lld %-2d %s\n", get_time() - data->begin_time, \
-		vars->idx + 1, s);
-	pthread_mutex_unlock(&data->print);
-	return (0);
+	pthread_mutex_lock(&data->fork[i]);
+}
+
+void	ft_unlock(t_data *data, int i)
+{
+	pthread_mutex_unlock(&data->fork[i]);
 }

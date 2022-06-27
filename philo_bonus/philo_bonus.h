@@ -6,7 +6,7 @@
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 23:58:21 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/06/26 23:22:21 by nhanafi          ###   ########.fr       */
+/*   Updated: 2022/06/25 00:20:27 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_data {
 	int			sleep_time;
 	int			nbr_time;
 	long long	begin_time;
-	sem_t		*dead;
+	sem_t		*dead; 
 	sem_t		*fork;
 	sem_t		*stop;
 	sem_t		*must_eat;
