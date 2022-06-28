@@ -6,7 +6,7 @@
 /*   By: nhanafi <nhanafi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 11:27:04 by nhanafi           #+#    #+#             */
-/*   Updated: 2022/06/27 20:16:11 by nhanafi          ###   ########.fr       */
+/*   Updated: 2022/06/28 20:09:05 by nhanafi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	init_data(t_data *data, char **av)
 	i = -1;
 	data->nbr = ft_atoi(av[1]);
 	data->fork = malloc(sizeof(pthread_mutex_t) * (data->nbr + 1));
-	if(data->fork)
+	if(!data->fork)
 		return (1);
 	while (++i < data->nbr + 1)
 		if (pthread_mutex_init(&data->fork[i], NULL) != 0)
